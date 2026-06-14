@@ -1,0 +1,50 @@
+{
+    "name": "htu/complaint-system",
+    "description": "Anonymous Complaint System for HTU",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "HTU Complaint System Team",
+            "email": "contact@htu.edu.gh"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "ext-pdo": "*",
+        "mpdf/mpdf": "^8.2",
+        "phpmailer/phpmailer": "^7.0.2",
+        "phpoffice/phpspreadsheet": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "HtuComplaint\\": "includes/"
+        },
+        "files": [
+            "config/database.php",
+            "config/constants.php",
+            "config/mail_config.php",
+            "includes/utilities/helpers.php"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php -r \"if (!file_exists('config/database.php')) { copy('config/database.example.php', 'config/database.php'); }\"",
+            "php -r \"if (!file_exists('.env')) { copy('.env.example', '.env'); }\""
+        ],
+        "post-update-cmd": [
+            "php -r \"if (!file_exists('config/database.php')) { copy('config/database.example.php', 'config/database.php'); }\"",
+            "php -r \"if (!file_exists('.env')) { copy('.env.example', '.env'); }\""
+        ]
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
